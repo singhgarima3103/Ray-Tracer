@@ -1,60 +1,51 @@
-CAP 5705 – Homework 2
+CAP 5705 – Homework 1
+Due September 22, 2012
 Start Early!
-Due date: October 10, 2014
-Graphics Pipeline – Rasterization
-Smooth1
-is an example of an OpenGL program that loads a mesh (given in an .OBJ file)
-and renders it with various features. Learn how smooth works so that you can modify the
-code. You can find meshes in .OBJ format from various online sources (that need to be
-properly acknowledged).
-You are to modify the smooth program to implement a basic graphics pipeline for rendering
-triangular meshes. You may use all the functions in smooth for loading an .OBJ
-file and the data structures for maintaining and accessing vertices and faces of a triangular
-mesh.
-Rasterization
-Implement a rasterization algorithm that takes the coordinates of a 2-D triangle and generates
-fragments using the scan-line algorithm. You can use the glDrawPixels method for
-rendering the generated fragments. 30pt
-• Modify the smooth program so that it will use your rasterization algorithm to draw 2-D
-triangles that are projected from the loaded 3-D model (have a look at gluProject).
-• Use “data/cube.obj” as a starting object to test your implementation.
-• Keep the previous functionality of the smooth program; allow the user to switch
-to your pipeline by pressing the key ’y’. This key will toggle onto and off of your
-implementation of the pipeline.
-Z-Buffer and Shading
-In this section you will complete the implementation of the graphics pipeline by incorporating
-the Z-buffer and shading steps into the rasterization framework that you developed.
-• As you recall gluProject returns the depth values of projected vertices (i.e., z
-0
-). To
-determine the depth values for each fragment, that the scan-line algorithm draws,
-you will implement the barycentric interpolation on the depth values associated to
-each of the projected vertices.The interpolated depth values will provide a Z-buffer for
-1http://www.xmission.com/∼nate/smooth.html
+First-Hit Ray Tracer
+In this homework you will write a simple ray tracer to render a scene composed of two spheres and
+a tetrahedron. The two spheres are of different radii and colors (e.g., blue and green). Pick the
+centers and the radii of the spheres so that they do not intersect in the 3-D space.
+For simplicity, you may assume a directional light and a parallel camera geometry for rendering
+purposes. This means that a single LookAt vector can be used to generate all rays. For example,
+you may set the LightDir = (0, 1, 0) and LookAt = (0, 0, −1).
+• Write a simple OpenGL program to display an image. Fix the window size (e.g., 256 × 256).
+You may use the glDrawPixels function to draw the contents of an array of RGB values.
+Verify the correctness of your program by displaying a test image that you generate (e.g., color
+stripes). 10pts
+• Generate parallel rays and solve the ray-object intersection problems to determine the color
+of each pixel. Verify the correctness of your ray tracer by rendering the scene from multiple
+angles (e.g., change the LookAt vector). 20pts
+• Add ambient, diffuse and specular shading to your ray tracer. Pick the ambient, diffuse and
+specular constants and light intensities to reflect a realistic rendering of the scene. 20pts
+• Add a glazed surface to the scene. You may choose to set one of the objects in the scene or
+have a plane below these objects that appears as a glazed surface. 20pts
+• Create a small animation by changing the LookAt vector and assembling the rendered images
+into a movie. 10pts
+• Along with the source code and makefile, submit a report (a PDF file) that describes and
+documents your experiments for each step of the homework. 20pts
 1
-each triangle which is being rendered. The final stage of the Z-buffer algorithm can be
-implemented as you blend each rendered triangle to the final image (i.e., frame-buffer);
-simply over a pixel value only if it is further to the viewer from the new fragment you
-are currently drawing. 20pt
-• Implement flat shading for your pipeline. Query each triangle for its normal, and
-perform the local illumination (ambient, diffuse, specular) per triangle. Simply use
-the current lighting setup (i.e., direction, intensity, . . . ) that is available in smooth
-for your shading calculations. 20pt
-• Modify your pipeline to include Gouraud shading – vertex shader and interpolate
-RGB’s produced by the shader across the triangle. 10pt
-• Use “data/cube.obj” as a starting object to test your implementation. Once tested,
-examine your pipeline using more sophisticated models.
-Submit a report (PDF document) that, along with images, documents the results for
-each step of the homework. Moreover, in the report explain any differences between the
-images rendered in your pipeline and the image produced in smooth. Also comment on why
-your implementation is slower than the original implementation. 20pt
-Acknowledgments
-This is a single-person project. What you submit needs to be your own work. If you are
-using resources for any part of the homework (including ideas, source code and images),
-makes sure to include proper citation and clear acknowledgments in your report.
+Programming with OpenGL (GLUT)
+This homework only requires a basic OpenGL program to display an image rendered by your ray
+tracer. Therefore, you may start with an example GLUT program and adjust its display method
+to use glDrawPixels to display the content of the ray traced image.
+OpenGL is a standard API for writing 2-D and 3-D graphics applications. You can get an
+overview about OpenGL from various sources such as the “OpenGL Programming Guide” by Woo,
+Neider and Davis (Addison Wesley). There are numerous online resources1 and tutorials2
+.
+GLUT3
+is an OpenGL utility toolkit that you can use to work with OpenGL a little easier.
+GLUT is freely available in common platforms. FreeGLUT4
+is an open source alternative to GLUT
+which is better maintained.
 Submission Guidelines
-• Submit to Sakai, a single file as a .zip, tar or a .tgz bundle that contains all the files
-to be submitted. Include your written programs in the submission bundle and have a
-README file with sufficient instructions on how to run your programs.
-• Late submissions are only accepted up to 3 days past the deadline and are penalized
-by 10% for each day past the due date.
+Submit to E-learning site a single file as a .zip or a .tar.gz bundle that contains all the files to be
+submitted. Include the source codes for your programs in the submission bundle. Please include a
+‘README’ file that clearly explains how to run and test the program. Also include a ‘Makefile’ that
+compiles and links the program from the source files. Please make sure your program compiles/runs
+in the CISE linux machines.
+Late submissions are penalized by 20% of the grade for each day past the due date.
+1http://en.wikipedia.org/wiki/OpenGL
+2http://nehe.gamedev.net/
+3http://www.opengl.org/resources/libraries/glut/
+4http://freeglut.sourceforge.net/
+2
